@@ -42,6 +42,12 @@ int _printf(const char *format, ...)
 					length++;
 				write(1, str, length);
 				task += length;
+			}
+			else if (*formart == 'd' || *format == 'i')
+			{
+			int num = va_arg(list, int);
+			task += _print_int(num);
+			}	
 	format++;
 	}
 	va_end(list);
@@ -50,6 +56,6 @@ int _printf(const char *format, ...)
 		}
 		va_end(list);
 		format++;
-		}
+	}
 	return (task);
 }
