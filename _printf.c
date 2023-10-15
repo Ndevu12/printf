@@ -48,6 +48,16 @@ int _printf(const char *format, ...)
 				write(1, str, length);
 				task += length;
 			}
+			else if (*formart == 'd' || *format == 'i')
+			{
+			int num = va_arg(list, int);
+			task += _print_int(num);
+			}	
+	format++;
+	}
+	va_end(list);
+	return (task);
+}
 		}
 		va_end(list);
 		format++;
