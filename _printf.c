@@ -1,68 +1,55 @@
 #include "main.h"
 #include <stdarg.h>
-#include <unistd.h>
-
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list list;
 	int task = 0;
 	if (format == NULL)
+	{
 		return -1;
-	va start(args, format);
-	for (; *format; format++)
+	}
+	va_start(list, format);
+	while (*format)
 	{
 		if (*format != '%')
 		{
-			_putchar(*formatr);
+			write(1, format, 1);
 			task++;
 		}
 		else
 		{
 			format++;
-			if (*format == '\0')
+			if  (*format == '\0')
 			{
-				_putchar(va_arg(args, int));
-				task++
+				break;
 			}
-				char *str = va_arg(args, char*);
-				while (*str)
-				{
-					_putchar(*str++);
-					task++;
-				}
+			else if (*format == 'c')
+			{
+				char c = va_arg(list, int);
+				write(1, &c, 1);
 			}
 			else if (*format == '%')
 			{
-				_putchar('%');
+				write(1, format, 1);
 				task++;
 			}
-			else if (*format == 'd' || *format == 'i')
-				task += _print_int(va_arg(args, int));
+			else if (*format == 's')
+			{
+				char *str = va_arg(list, char*);
+				/*calculating the length of string*/
+				int length = 0;
+				while (str[length] != '\0')
+					length++;
+				write(1, str, length);
+				task += length;
+	format++;
 	}
-		
-	va_end(args);
-	return task;
+	va_end(list);
+	return (task);
 }
-int _print_int(int n)
-{
-	int task = 0, sign = 1;
-	unsigned int num;
-	if (n < 0)
-	{
-		_putchar('-');
-		task++;
-		num = -n;
-	}
-	else
-		num = n;
-	if (num / 10)
-		task += _print_int(num / 10);
-	_putchar(num % 10 + '0');
-	return task +1;
+		}
+		va_end(list);
+		format++;
+		}
+	return (task);
 }
-int _putchar(char c)
-{
-	return write(1, &c, 1);
-}
-
-
