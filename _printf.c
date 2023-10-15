@@ -1,66 +1,68 @@
 #include "main.h"
 #include <stdarg.h>
+#include <unistd.h>
+
 int _printf(const char *format, ...)
 {
-	va_list list;
+	va_list args;
 	int task = 0;
-
-
 	if (format == NULL)
-	{
 		return -1;
-	}
-	va_start(list, format);
-
-	while (*format)
+	va start(args, format);
+	for (; *format; format++)
 	{
 		if (*format != '%')
 		{
-			write(1, format, 1);
+			_putchar(*formatr);
 			task++;
 		}
 		else
 		{
 			format++;
-			if  (*format == '\0')
+			if (*format == '\0')
 			{
-				break;
+				_putchar(va_arg(args, int));
+				task++
 			}
-			else if (*format == 'c')
-			{
-
-				char c = va_arg(list, int);
-				write(1, &c, 1);
+				char *str = va_arg(args, char*);
+				while (*str)
+				{
+					_putchar(*str++);
+					task++;
+				}
 			}
 			else if (*format == '%')
 			{
-				write(1, format, 1);
+				_putchar('%');
 				task++;
 			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(list, char*);
+			else if (*format == 'd' || *format == 'i')
+				task += _print_int(va_arg(args, int));
+	}
+		
+	va_end(args);
+	return task;
+}
+int _print_int(int n)
+{
+	int task = 0, sign = 1;
+	unsigned int num;
+	if (n < 0)
+	{
+		_putchar('-');
+		task++;
+		num = -n;
+	}
+	else
+		num = n;
+	if (num / 10)
+		task += _print_int(num / 10);
+	_putchar(num % 10 + '0');
+	return task +1;
+}
+int _putchar(char c)
+{
+	return write(1, &c, 1);
+}
 
-				/*calculating the length of string*/
-				int length = 0;
-				while (str[length] != '\0')
-					length++;
-				write(1, str, length);
-				task += length;
-			}
-			else if (*formart == 'd' || *format == 'i')
-			{
-			int num = va_arg(list, int);
-			task += _print_int(num);
-			}	
-	format++;
-	}
-	va_end(list);
-	return (task);
-}
-		}
-		va_end(list);
-		format++;
-	}
-	return (task);
-}
+
