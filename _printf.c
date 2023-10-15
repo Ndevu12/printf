@@ -48,9 +48,17 @@ int _printf(const char *format, ...)
 				write(1, str, length);
 				task += length;
 			}
+			else 
+			{
+				write(1, format, 1);
+				task++;
+			}
 		}
-		va_end(list);
+
+	
 		format++;
 	}
+	va_end(list);
 	return (task);
+
 }
