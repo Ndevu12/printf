@@ -9,7 +9,6 @@ int _printf(const char *format, ...)
 		return -1;
 	}
 	va_start(list, format);
-
 	while (*format)
 	{
 		if (*format != '%')
@@ -20,7 +19,7 @@ int _printf(const char *format, ...)
 		else
 		{
 			format++;
-                         if (*format == '\0')
+                        if (*format == '\0')
 				 break;
 			task += percent_sign(format, list);	
 		}
