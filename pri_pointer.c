@@ -14,12 +14,12 @@ int print_pointer(va_list list)
 
 	p_buff = itoa(va_arg(list, unsigned long int), 16);
 
-	if (!_strcmp(p_buff, "0"))
+	if (!strcmp(p_buff, "0"))
 		return (print("(nil)"));
 
 	size = print("0x");
 
-	if (!_strcmp(p_buff, "-1"))
+	if (!strcmp(p_buff, "-1"))
 		size += print("ffffffffffffffff");
 	else
 		size += print(p_buff);
