@@ -12,19 +12,18 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 	{
+		return -1;
 		return (-1);
 	}
 	va_start(list, format);
 	while (*format)
-	{
-		if (*format != '%')
-		{
-			write(1, format, 1);
-			task++;
-		}
+@@ -19,9 +25,9 @@ int _printf(const char *format, ...)
 		else
 		{
 			format++;
+                        if (*format == '\0')
+				 break;
+			task += percent_sign(format, list);	
 			if (*format == '\0')
 				break;
 			task += percent_sign(format, list);

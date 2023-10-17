@@ -1,4 +1,7 @@
 #include "main.h"
+
+
+int percent_sign( const char *str, va_list list)
 /**
  * percent_sign - check for next charactor sfter %
  * @str: first arugment
@@ -8,6 +11,7 @@
 int percent_sign(const char *str, va_list list)
 {
 	int task = 0;
+	
 
 	if (*str == 'c')
 	{
@@ -16,14 +20,11 @@ int percent_sign(const char *str, va_list list)
 		write(1, &c, 1);
 		task++;
 	}
-	else if (*str == '%')
-	{
-		write(1, str, 1);
-		task++;
-	}
+@@ -19,8 +24,8 @@ int percent_sign( const char *str, va_list list)
 	else if (*str == 's')
 	{
 		char *strs = va_arg(list, char*);
+		/*calculating the length of string*/
 		int length = 0;
 		/*calculating the length of str*/
 		while (strs[length] != '\0')
