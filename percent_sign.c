@@ -20,7 +20,7 @@ int percent_sign(const char *str, va_list list)
 		write(1, &c, 1);
 		task++;
 	}
-@@ -19,8 +24,8 @@ int percent_sign( const char *str, va_list list)
+int percent_sign( const char *str, va_list list)
 	else if (*str == 's')
 	{
 		char *strs = va_arg(list, char*);
